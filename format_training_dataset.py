@@ -50,7 +50,5 @@ for data in train_data:
     )
     sft_train.append(curr_data)
 
-with open("sft_train.jsonl", "w") as f:
-    for item in sft_train:
-        json_str = json.dumps(item, indent=2)
-        f.write(json_str + "\n")
+with open("sft_train.json", "w") as f:
+    json.dump(sft_train, f, indent=2)
