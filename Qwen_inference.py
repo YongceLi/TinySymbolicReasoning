@@ -12,7 +12,7 @@ def main(args):
     
     pipe = pipeline(
         "text-generation",
-        model="Qwen/Qwen2.5-Math-1.5B-Instruct",
+        model="Yongce/qwen_2_Math_SFT_symbolic_reasoning",
         tokenizer=tokenizer,
         device=0,
         batch_size=2 
@@ -68,7 +68,7 @@ def main(args):
     for i, result in enumerate(results):
         generation[test_data[i]["id"]] = result[0]["generated_text"]
     
-    output_file = "Qwen_generation.json"
+    output_file = "Qwen_generation_sft.json"
     with open(output_file, "w") as f:
         json.dump(generation, f, indent=2)
     
