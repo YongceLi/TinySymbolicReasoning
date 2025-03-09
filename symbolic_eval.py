@@ -118,8 +118,7 @@ if __name__ == "__main__":
                     false_count += 1
             except:
                 false_count += 1
-    print(f"Total sequence pair reasoning: {total_count}, False: {false_count}\nAccuracy: {
-        (total_count - false_count) / total_count:.2%}, False Rate: {false_count / total_count:.2%}")
+    print(f"Total sequence pair reasoning: {total_count}, False: {false_count}\nAccuracy: {(total_count - false_count) / total_count:.2%}, False Rate: {false_count / total_count:.2%}")
     gt_count = 0
     gt_false_count = 0
     for key in tqdm(output):
@@ -133,5 +132,4 @@ if __name__ == "__main__":
                     gt_false_count += 1
             except:
                 gt_false_count += 1
-    print(f"Total reasoning: {gt_count}, False: {gt_false_count}\nAccuracy: {
-        (gt_count - gt_false_count) / gt_count:.2%}, False Rate: {gt_false_count / gt_count:.2%}")
+    print(f"Total reasoning: {gt_count}, False: {gt_false_count}\nAccuracy: {(gt_count - gt_false_count) / gt_count:.2%}, False Rate: {gt_false_count / gt_count:.2%}")
