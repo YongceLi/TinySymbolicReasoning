@@ -8,19 +8,19 @@ def extract_conclusion(response_text):
     # Look for different formats of conclusions
     patterns = [
         # LaTeX format with boxed and text commands (most common in output)
-        r'\\\[\s*\\boxed{(?:(?:A|B|C):\s*\\text{(?:truth-teller|liar)}(?:\s*,\s*(?:A|B|C):\s*\\text{(?:truth-teller|liar)})*|\\text{(?:A|B|C):\s*(?:truth-teller|liar)(?:,\s*(?:A|B|C):\s*(?:truth-teller|liar))*})}\s*\\\]',
+        r'\\\[\s*\\boxed{(?:(?:[A-E]|Person [A-E]):\s*\\text{(?:truth-teller|liar)}(?:\s*,\s*(?:[A-E]|Person [A-E]):\s*\\text{(?:truth-teller|liar)})*|\\text{(?:[A-E]|Person [A-E]):\s*(?:truth-teller|liar)(?:,\s*(?:[A-E]|Person [A-E]):\s*(?:truth-teller|liar))*})}\s*\\\]',
         
         # Format with conclusion indicators and various styles
-        r'(?:Thus|So|Therefore|Hence|The final answer is|Final identities|In summary|Based on this analysis|We conclude|The identities are|Conclusively)(?:[^\n]*\n){0,3}(?:\s*[-\*•]?\s*\**(?:A|B|C):\s*(?:truth-teller|liar)\**(?:\n|$)){1,3}',
+        r'(?:Thus|So|Therefore|Hence|The final answer is|Final identities|In summary|Based on this analysis|We conclude|The identities are|Conclusively)(?:[^\n]*\n){0,3}(?:\s*[-\*•]?\s*\**(?:[A-E]|Person [A-E]):\s*(?:truth-teller|liar)\**(?:\n|$)){1,5}',
         
         # Original format at the end of text with flexible spacing
-        r'(?:\s*(?:A|B|C):\s*(?:truth-teller|liar)(?:\n|\s)*){1,3}\s*$',
+        r'(?:\s*(?:[A-E]|Person [A-E]):\s*(?:truth-teller|liar)(?:\n|\s)*){1,5}\s*$',
         
         # Format with "Therefore" or "CONCLUSION" prefix
-        r'(?:Therefore|CONCLUSION)[^\n]*\n\s*(?:A|B|C):\s*(?:truth-teller|liar)(?:\n(?:A|B|C):\s*(?:truth-teller|liar))*',
+        r'(?:Therefore|CONCLUSION)[^\n]*\n\s*(?:[A-E]|Person [A-E]):\s*(?:truth-teller|liar)(?:\n(?:[A-E]|Person [A-E]):\s*(?:truth-teller|liar))*',
         
         # Bullet point format with optional bold markers
-        r'(?:\s*[-\*•]?\s*\**(?:A|B|C):\s*(?:truth-teller|liar)\**(?:\n|$)){1,3}'
+        r'(?:\s*[-\*•]?\s*\**(?:[A-E]|Person [A-E]):\s*(?:truth-teller|liar)\**(?:\n|$)){1,5}'
     ]
     
     for pattern in patterns:
