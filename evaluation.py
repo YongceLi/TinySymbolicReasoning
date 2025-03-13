@@ -4,6 +4,20 @@ import re
 from tqdm import tqdm
 import argparse
 
+def extract_conclusion_strict(response_text):
+    try:
+        result = {}
+        lines = [line.strip() for line in response_text.strip().split('\n') if ':' in line]
+        for line in lines:
+            char, identity = line.split(':')
+            char = char.strip()
+            identity = identity.strip().lower()
+            result[char] = ('truth' in identity)
+        if result:  
+            return result
+    except Exception as e:
+        return None
+    
 def extract_conclusion(response_text):
     # Look for different formats of conclusions
     patterns = [
@@ -54,9 +68,6 @@ def extract_conclusion(response_text):
                         char = char.strip(' -*•')
                         identity = identity.strip().lower()
                         result[char] = ('truth' in identity)
-                
-                if len(result) > 0 and len(result) <= 3:
-                    return result
                 
         except Exception as e:
             print(f"Error processing pattern: {str(e)}")
